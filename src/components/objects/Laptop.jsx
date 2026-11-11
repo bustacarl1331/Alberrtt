@@ -56,8 +56,6 @@ export default function Laptop({
     }
   });
 
-  const screenAngle = (-110 * Math.PI) / 180;
-
   return (
     <group
       ref={groupRef}
@@ -69,49 +67,57 @@ export default function Laptop({
       {...props}
     >
       {/* === BASE === */}
-      <mesh position={[0, 0.02, 0]}>
-        <boxGeometry args={[1.0, 0.04, 0.7]} />
-        <meshStandardMaterial color="#2a2a2e" roughness={0.6} metalness={0.3} />
+      <mesh position={[0, 0.025, 0]} castShadow receiveShadow>
+        <boxGeometry args={[1.05, 0.055, 0.72]} />
+        <meshStandardMaterial color="#252932" roughness={0.42} metalness={0.55} />
       </mesh>
 
       {/* === KEYBOARD KEYS === */}
       {keys.map((k, i) => (
         <mesh key={i} position={[k.x, 0.045, k.z]}>
           <boxGeometry args={[0.054, 0.01, 0.045]} />
-          <meshStandardMaterial color="#1e1e22" roughness={0.8} />
+          <meshStandardMaterial color="#11151b" roughness={0.72} metalness={0.12} />
         </mesh>
       ))}
 
       {/* === TRACKPAD === */}
-      <mesh position={[0, 0.045, 0.18]}>
+      <mesh position={[0, 0.058, 0.19]}>
         <boxGeometry args={[0.22, 0.005, 0.14]} />
-        <meshStandardMaterial color="#222226" roughness={0.7} metalness={0.2} />
+        <meshStandardMaterial color="#333a45" roughness={0.35} metalness={0.35} />
       </mesh>
 
       {/* === SCREEN HINGE AREA === */}
-      <group position={[0, 0.04, -0.35]} rotation={[screenAngle, 0, 0]}>
+      <group position={[0, 0.055, -0.33]}>
+        <mesh position={[-0.28, 0.015, 0]}>
+          <cylinderGeometry args={[0.022, 0.022, 0.16, 16]} />
+          <meshStandardMaterial color="#566170" roughness={0.28} metalness={0.8} />
+        </mesh>
+        <mesh position={[0.28, 0.015, 0]}>
+          <cylinderGeometry args={[0.022, 0.022, 0.16, 16]} />
+          <meshStandardMaterial color="#566170" roughness={0.28} metalness={0.8} />
+        </mesh>
         {/* Screen frame */}
-        <mesh position={[0, 0.275, -0.01]}>
-          <boxGeometry args={[0.95, 0.55, 0.02]} />
-          <meshStandardMaterial color="#1a1a1e" roughness={0.5} metalness={0.4} />
+        <mesh position={[0, 0.31, 0]} castShadow>
+          <boxGeometry args={[0.98, 0.6, 0.035]} />
+          <meshStandardMaterial color="#161b22" roughness={0.34} metalness={0.6} />
         </mesh>
 
         {/* Screen face (emissive) */}
-        <mesh position={[0, 0.275, 0.001]}>
-          <planeGeometry args={[0.85, 0.48]} />
+        <mesh position={[0, 0.31, 0.02]}>
+          <boxGeometry args={[0.86, 0.48, 0.008]} />
           <meshStandardMaterial
             ref={screenMatRef}
-            color="#0a0a0e"
-            emissive="#0ea5e9"
-            emissiveIntensity={0.5}
+            color="#102536"
+            emissive="#2bb8ed"
+            emissiveIntensity={0.7}
             toneMapped={false}
           />
         </mesh>
 
         {/* Webcam dot */}
-        <mesh position={[0, 0.525, 0.001]}>
+        <mesh position={[0, 0.57, 0.022]}>
           <sphereGeometry args={[0.008, 8, 8]} />
-          <meshStandardMaterial color="#111" />
+          <meshStandardMaterial color="#7dd3fc" emissive="#38bdf8" emissiveIntensity={1.5} />
         </mesh>
       </group>
 

@@ -14,24 +14,14 @@ export default function DeskLamp({
   const groupRef = useRef();
   const bulbRef = useRef();
 
-  // Arm angles
-  const lowerArmAngle = (-60 * Math.PI) / 180;
-  const upperArmAngle = (30 * Math.PI) / 180;
-
-  // Dimensions
-  const lowerArmLen = 0.4;
-  const upperArmLen = 0.35;
-
-  // Calculate joint position (end of lower arm)
-  const jointX = Math.sin(-lowerArmAngle) * lowerArmLen;
-  const jointY = Math.cos(-lowerArmAngle) * lowerArmLen;
-
-  // Calculate lamp head position (end of upper arm, relative to joint)
-  const headDx = Math.sin(-lowerArmAngle + upperArmAngle) * upperArmLen;
-  const headDy = Math.cos(-lowerArmAngle + upperArmAngle) * upperArmLen;
-
-  const headX = jointX + headDx;
-  const headY = jointY + headDy;
+  const lowerArmLen = 0.42;
+  const upperArmLen = 0.34;
+  const lowerArmAngle = -Math.PI * 0.28;
+  const upperArmAngle = Math.PI * 0.42;
+  const jointX = Math.sin(lowerArmAngle) * lowerArmLen;
+  const jointY = Math.cos(lowerArmAngle) * lowerArmLen;
+  const headX = jointX + Math.sin(lowerArmAngle + upperArmAngle) * upperArmLen;
+  const headY = jointY + Math.cos(lowerArmAngle + upperArmAngle) * upperArmLen;
 
   useFrame((state) => {
     if (!groupRef.current) return;
@@ -58,9 +48,9 @@ export default function DeskLamp({
       {...props}
     >
       {/* === BASE === */}
-      <mesh position={[0, 0.015, 0]}>
+      <mesh position={[0, 0.015, 0]} castShadow receiveShadow>
         <cylinderGeometry args={[0.15, 0.16, 0.03, 16]} />
-        <meshStandardMaterial color="#333333" roughness={0.5} metalness={0.6} />
+        <meshStandardMaterial color="#303846" roughness={0.32} metalness={0.72} />
       </mesh>
 
       {/* === BASE ACCENT RING === */}
@@ -73,40 +63,42 @@ export default function DeskLamp({
       <group position={[0, 0.03, 0]}>
         <mesh
           position={[jointX / 2, jointY / 2, 0]}
-          rotation={[0, 0, lowerArmAngle]}
+          rotation={[0, 0, -lowerArmAngle]}
+          castShadow
         >
-          <boxGeometry args={[0.025, lowerArmLen, 0.025]} />
-          <meshStandardMaterial color="#444444" roughness={0.5} metalness={0.5} />
+          <boxGeometry args={[0.035, lowerArmLen, 0.035]} />
+          <meshStandardMaterial color="#596273" roughness={0.3} metalness={0.72} />
         </mesh>
 
         {/* === JOINT (sphere) === */}
         <mesh position={[jointX, jointY, 0]}>
           <sphereGeometry args={[0.025, 8, 8]} />
-          <meshStandardMaterial color="#555555" roughness={0.4} metalness={0.6} />
+          <meshStandardMaterial color="#9aa5b5" roughness={0.25} metalness={0.8} />
         </mesh>
 
         {/* === UPPER ARM === */}
         <mesh
           position={[
-            jointX + headDx / 2,
-            jointY + headDy / 2,
+            jointX + (headX - jointX) / 2,
+            jointY + (headY - jointY) / 2,
             0,
           ]}
-          rotation={[0, 0, lowerArmAngle - upperArmAngle]}
+          rotation={[0, 0, -(lowerArmAngle + upperArmAngle)]}
+          castShadow
         >
-          <boxGeometry args={[0.025, upperArmLen, 0.025]} />
-          <meshStandardMaterial color="#444444" roughness={0.5} metalness={0.5} />
+          <boxGeometry args={[0.035, upperArmLen, 0.035]} />
+          <meshStandardMaterial color="#596273" roughness={0.3} metalness={0.72} />
         </mesh>
 
         {/* === LAMP HEAD === */}
         <group position={[headX, headY, 0]}>
           {/* Head cone/shade */}
-          <mesh rotation={[0, 0, lowerArmAngle - upperArmAngle + Math.PI]}>
-            <coneGeometry args={[0.08, 0.1, 12, 1, true]} />
+          <mesh rotation={[0, 0, -(lowerArmAngle + upperArmAngle)]} castShadow>
+            <coneGeometry args={[0.1, 0.14, 16, 1, true]} />
             <meshStandardMaterial
-              color="#333333"
-              roughness={0.5}
-              metalness={0.5}
+              color="#303846"
+              roughness={0.32}
+              metalness={0.68}
               side={2}
             />
           </mesh>
@@ -114,8 +106,8 @@ export default function DeskLamp({
           {/* Cap on top of shade */}
           <mesh
             position={[
-              Math.sin(lowerArmAngle - upperArmAngle) * 0.05,
-              Math.cos(lowerArmAngle - upperArmAngle) * 0.05,
+              Math.sin(lowerArmAngle + upperArmAngle) * 0.07,
+              Math.cos(lowerArmAngle + upperArmAngle) * 0.07,
               0,
             ]}
           >
@@ -126,8 +118,8 @@ export default function DeskLamp({
           {/* Bulb */}
           <mesh
             position={[
-              -Math.sin(lowerArmAngle - upperArmAngle) * 0.025,
-              -Math.cos(lowerArmAngle - upperArmAngle) * 0.025,
+              -Math.sin(lowerArmAngle + upperArmAngle) * 0.04,
+              -Math.cos(lowerArmAngle + upperArmAngle) * 0.04,
               0,
             ]}
           >
@@ -136,7 +128,7 @@ export default function DeskLamp({
               ref={bulbRef}
               color="#fff5e0"
               emissive="#fbbf24"
-              emissiveIntensity={1.5}
+              emissiveIntensity={2.2}
               toneMapped={false}
             />
           </mesh>
@@ -144,13 +136,13 @@ export default function DeskLamp({
           {/* Point light at bulb */}
           <pointLight
             position={[
-              -Math.sin(lowerArmAngle - upperArmAngle) * 0.04,
-              -Math.cos(lowerArmAngle - upperArmAngle) * 0.04,
+              -Math.sin(lowerArmAngle + upperArmAngle) * 0.05,
+              -Math.cos(lowerArmAngle + upperArmAngle) * 0.05,
               0,
             ]}
             color="#fbbf24"
-            intensity={0.8}
-            distance={3}
+            intensity={1.5}
+            distance={3.5}
             decay={2}
           />
         </group>

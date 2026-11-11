@@ -1,5 +1,6 @@
 import React from 'react'
-import { ContactShadows } from '@react-three/drei'
+import { ContactShadows, Environment } from '@react-three/drei'
+import { EffectComposer, Bloom, Vignette, Noise } from '@react-three/postprocessing'
 import Desk from './Desk'
 import Lighting from './Lighting'
 import CameraController from './CameraController'
@@ -25,18 +26,20 @@ export default function Scene() {
     <>
       <Lighting />
       <CameraController />
+      <Environment preset="night" background={false} environmentIntensity={0.28} />
 
       {/* Desk */}
       <Desk />
 
       {/* Contact Shadows under desk objects */}
       <ContactShadows
-        position={[0, 0.79, 0]}
-        opacity={0.4}
-        scale={8}
-        blur={2}
-        far={2}
-        color="#000000"
+        position={[0, 0.8, 0]}
+        opacity={0.52}
+        scale={7.5}
+        blur={2.4}
+        far={2.8}
+        resolution={1024}
+        color="#140d08"
       />
 
       {/* === INTERACTIVE OBJECTS === */}
@@ -141,6 +144,12 @@ export default function Scene() {
 
       {/* === DECORATIVE PROPS === */}
       <Props />
+
+      <EffectComposer multisampling={4}>
+        <Bloom luminanceThreshold={0.8} mipmapBlur intensity={0.32} radius={0.65} />
+        <Vignette eskil={false} offset={0.18} darkness={0.55} />
+        <Noise opacity={0.018} />
+      </EffectComposer>
     </>
   )
 }

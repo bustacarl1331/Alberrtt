@@ -1,7 +1,6 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
-import * as THREE from 'three'
 import usePortfolioStore from '../../store/usePortfolioStore'
 
 export default function InteractiveObject({
@@ -15,7 +14,6 @@ export default function InteractiveObject({
   const groupRef = useRef()
   const { hoveredObject, activeSection, setHoveredObject, setActiveSection, isEntered } = usePortfolioStore()
   const isHovered = hoveredObject === id
-  const isActive = activeSection === id
 
   // Animation state
   const animState = useRef({
@@ -34,9 +32,6 @@ export default function InteractiveObject({
 
     // Idle floating
     const idleY = reducedMotion ? 0 : Math.sin(t * 0.8) * 0.025
-    const idleRotY = reducedMotion ? 0 : Math.sin(t * 0.5) * 0.015
-    const idleRotX = reducedMotion ? 0 : Math.sin(t * 0.3 + 1) * 0.008
-
     // Hover targets
     animState.current.targetY = isHovered ? 0.25 : 0
     animState.current.targetScale = isHovered ? 1.08 : 1
@@ -51,8 +46,9 @@ export default function InteractiveObject({
     groupRef.current.position.y = position[1] + idleY + animState.current.currentY
     groupRef.current.position.z = position[2]
 
-    groupRef.current.rotation.y = idleRotY
-    groupRef.current.rotation.x = idleRotX
+    // Keep authored model rotations stable. Floating the whole object is enough;
+    // rotating the parent made hinged props appear twisted.
+    groupRef.current.rotation.set(0, 0, 0)
 
     const s = animState.current.currentScale
     groupRef.current.scale.set(s, s, s)
