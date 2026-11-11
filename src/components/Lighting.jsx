@@ -4,7 +4,7 @@ export default function Lighting() {
   return (
     <>
       {/* Low neutral fill keeps the scene readable without flattening shadows. */}
-      <ambientLight intensity={0.32} color="#6d7892" />
+      <ambientLight intensity={0.44} color="#8793ad" />
 
       {/* Visible overhead fixture and warm pool of light */}
       <mesh position={[0, 4.85, -0.15]}>
@@ -30,7 +30,7 @@ export default function Lighting() {
         position={[0, 6.8, 1.2]}
         angle={1.18}
         penumbra={0.92}
-        intensity={5.6}
+        intensity={6.2}
         color="#ffd18a"
         distance={14}
         castShadow
@@ -45,7 +45,7 @@ export default function Lighting() {
       {/* Floor wash creates the cozy pool around the desk and grounds the room. */}
       <pointLight
         position={[0, 1.4, 1.5]}
-        intensity={2.2}
+        intensity={2.8}
         color="#ffad66"
         distance={8}
         decay={1.7}
@@ -70,7 +70,7 @@ export default function Lighting() {
       {/* Soft front fill protects dark materials from clipping to black */}
       <directionalLight
         position={[2, 3, 5]}
-        intensity={0.35}
+        intensity={0.5}
         color="#f5d6ad"
       />
 

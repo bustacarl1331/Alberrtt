@@ -5,7 +5,7 @@ import gsap from 'gsap'
 import usePortfolioStore from '../store/usePortfolioStore'
 import { navObjects } from '../data/content'
 
-const DEFAULT_CAMERA_POS = new THREE.Vector3(4, 5, 4)
+const DEFAULT_CAMERA_POS = new THREE.Vector3(4.6, 5.4, 4.8)
 const DEFAULT_LOOK_AT = new THREE.Vector3(0, 0.5, 0)
 
 export default function CameraController() {

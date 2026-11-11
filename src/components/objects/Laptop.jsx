@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import { aboutData, educationData } from '../../data/content';
 
 export default function Laptop({
@@ -109,34 +109,75 @@ export default function Laptop({
           <boxGeometry args={[0.86, 0.48, 0.008]} />
           <meshStandardMaterial
             ref={screenMatRef}
-            color="#102536"
-            emissive="#2bb8ed"
-            emissiveIntensity={0.7}
+            color="#071722"
+            emissive="#0b3347"
+            emissiveIntensity={0.9}
             toneMapped={false}
           />
         </mesh>
 
-        {isActive && (
-          <Html
-            transform
-            position={[0, 0.31, 0.035]}
-            rotation={[0, 0, 0]}
-            distanceFactor={5.8}
-            style={{ pointerEvents: 'none' }}
-          >
-            <div className="laptop-screen-ui">
-              <div className="laptop-screen-kicker">PROFILE / 01</div>
-              <div className="laptop-screen-title">{aboutData.name}</div>
-              <div className="laptop-screen-role">{aboutData.title}</div>
-              <div className="laptop-screen-rule" />
-              <div className="laptop-screen-copy">
-                {aboutData.bio?.[0] || 'Building thoughtful hardware and software experiences.'}
-              </div>
-              <div className="laptop-screen-meta">
-                {educationData.branch} · {educationData.duration}
-              </div>
-            </div>
-          </Html>
+        {(
+          <group position={[0, 0, 0.031]}>
+            <mesh position={[-0.29, 0.43, 0]}>
+              <planeGeometry args={[0.72, 0.018]} />
+              <meshBasicMaterial color="#67e8f9" toneMapped={false} />
+            </mesh>
+            <Text
+              position={[-0.39, 0.49, 0.004]}
+              fontSize={0.045}
+              maxWidth={0.72}
+              anchorX="left"
+              anchorY="top"
+              color="#67e8f9"
+            >
+              PROFILE / 01
+            </Text>
+            <Text
+              position={[-0.39, 0.39, 0.004]}
+              fontSize={0.075}
+              maxWidth={0.72}
+              anchorX="left"
+              anchorY="top"
+              color="#ffffff"
+            >
+              {aboutData.name}
+            </Text>
+            <Text
+              position={[-0.39, 0.29, 0.004]}
+              fontSize={0.032}
+              maxWidth={0.72}
+              anchorX="left"
+              anchorY="top"
+              color="#fbbf24"
+            >
+              {aboutData.title}
+            </Text>
+            <mesh position={[-0.19, 0.18, 0]}>
+              <planeGeometry args={[0.5, 0.012]} />
+              <meshBasicMaterial color="#1e6b83" toneMapped={false} />
+            </mesh>
+            <Text
+              position={[-0.39, 0.12, 0.004]}
+              fontSize={0.024}
+              maxWidth={0.72}
+              lineHeight={1.35}
+              anchorX="left"
+              anchorY="top"
+              color="#b6d5df"
+            >
+              {aboutData.bio?.[0] || 'Building thoughtful hardware and software experiences.'}
+            </Text>
+            <Text
+              position={[-0.39, -0.13, 0.004]}
+              fontSize={0.021}
+              maxWidth={0.72}
+              anchorX="left"
+              anchorY="top"
+              color="#7dd3fc"
+            >
+              {educationData.branch}
+            </Text>
+          </group>
         )}
 
         {/* Webcam dot */}

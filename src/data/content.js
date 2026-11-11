@@ -189,7 +189,7 @@ export const navObjects = [
     objectType: "laptop",
     position: [0, 0.84, -0.55],
     cameraTarget: [0, 0.95, -0.55],
-    cameraPosition: [0, 1.85, 1.25],
+    cameraPosition: [0, 1.48, 0.62],
   },
   {
     id: "projects",

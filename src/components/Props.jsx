@@ -454,10 +454,10 @@ function Particles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.015}
+        size={0.009}
         color="#fbbf24"
         transparent
-        opacity={0.3}
+        opacity={0.12}
         sizeAttenuation
       />
     </points>
