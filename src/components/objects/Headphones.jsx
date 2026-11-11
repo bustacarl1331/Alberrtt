@@ -74,7 +74,7 @@ export default function Headphones({
       {...props}
     >
       {/* Lying flat on desk: rotate ~90deg on X */}
-      <group rotation={[Math.PI / 2, 0, 0]}>
+      <group rotation={[Math.PI / 2, 0, 0]} scale={1.28}>
         {/* === HEADBAND (half arc) === */}
         <mesh geometry={headbandGeo}>
           <meshStandardMaterial color="#2a2a2a" roughness={0.6} metalness={0.4} />

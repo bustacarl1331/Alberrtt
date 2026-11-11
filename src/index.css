@@ -75,3 +75,53 @@ html, body, #root {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   animation: shimmer 2s infinite;
 }
+
+.laptop-screen-ui {
+  width: 220px;
+  min-height: 124px;
+  padding: 12px 14px;
+  color: #d7f4ff;
+  background: linear-gradient(145deg, rgba(6, 32, 49, 0.94), rgba(7, 16, 29, 0.94));
+  border: 1px solid rgba(125, 211, 252, 0.52);
+  border-radius: 6px;
+  box-shadow: 0 0 24px rgba(14, 165, 233, 0.24), inset 0 0 18px rgba(14, 165, 233, 0.08);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.laptop-screen-kicker {
+  color: #67e8f9;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+}
+
+.laptop-screen-title {
+  margin-top: 7px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.laptop-screen-role {
+  margin-top: 2px;
+  color: #fbbf24;
+  font-size: 9px;
+}
+
+.laptop-screen-rule {
+  height: 1px;
+  margin: 8px 0;
+  background: linear-gradient(90deg, rgba(103, 232, 249, 0.8), transparent);
+}
+
+.laptop-screen-copy {
+  color: #a9c5d3;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.laptop-screen-meta {
+  margin-top: 8px;
+  color: #7dd3fc;
+  font-size: 7px;
+}

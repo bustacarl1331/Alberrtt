@@ -187,9 +187,9 @@ export const navObjects = [
     name: "About Me",
     subtitle: "Get to know me",
     objectType: "laptop",
-    position: [-1.5, 0.85, -0.5],
-    cameraTarget: [-1.5, 0.85, -0.5],
-    cameraPosition: [-1.5, 1.8, 1.5],
+    position: [0, 0.84, -0.55],
+    cameraTarget: [0, 0.95, -0.55],
+    cameraPosition: [0, 1.85, 1.25],
   },
   {
     id: "projects",

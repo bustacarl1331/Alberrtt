@@ -33,7 +33,7 @@ export default function InteractiveObject({
     // Idle floating
     const idleY = reducedMotion ? 0 : Math.sin(t * 0.8) * 0.025
     // Hover targets
-    animState.current.targetY = isHovered ? 0.25 : 0
+    animState.current.targetY = isHovered ? 0.08 : 0
     animState.current.targetScale = isHovered ? 1.08 : 1
 
     // Smooth interpolation

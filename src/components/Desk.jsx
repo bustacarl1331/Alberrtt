@@ -89,8 +89,16 @@ export default function Desk() {
       {/* Floor */}
       <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[20, 20]} />
-        <meshStandardMaterial color="#0d0d12" roughness={1} />
+        <meshStandardMaterial color="#17131a" roughness={0.92} metalness={0.02} />
       </mesh>
+
+      {/* Floor planks / subtle room texture */}
+      {Array.from({ length: 10 }).map((_, i) => (
+        <mesh key={`floor-line-${i}`} position={[0, 0.002, -4.5 + i]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[20, 0.012]} />
+          <meshBasicMaterial color="#3b2a25" transparent opacity={0.32} />
+        </mesh>
+      ))}
 
       {/* Back wall hint */}
       <mesh position={[0, 3, -5]} receiveShadow>

@@ -27,11 +27,12 @@ export default function Lighting() {
 
       {/* Broad warm key light aimed at the work surface */}
       <spotLight
-        position={[0, 5.8, 0.25]}
-        angle={1.05}
-        penumbra={0.85}
-        intensity={3.2}
+        position={[0, 6.8, 1.2]}
+        angle={1.18}
+        penumbra={0.92}
+        intensity={5.6}
         color="#ffd18a"
+        distance={14}
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
@@ -39,6 +40,15 @@ export default function Lighting() {
         shadow-normalBias={0.03}
         shadow-camera-near={1}
         shadow-camera-far={15}
+      />
+
+      {/* Floor wash creates the cozy pool around the desk and grounds the room. */}
+      <pointLight
+        position={[0, 1.4, 1.5]}
+        intensity={2.2}
+        color="#ffad66"
+        distance={8}
+        decay={1.7}
       />
 
       {/* Warm side fill from the lamp side */}

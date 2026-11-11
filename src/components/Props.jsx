@@ -303,6 +303,62 @@ function Books({ position = [0, 0, 0] }) {
   )
 }
 
+function WasteBin({ position = [0, 0, 0] }) {
+  return (
+    <group position={position} rotation={[0, -0.18, 0]}>
+      <mesh position={[0, 0.32, 0]} castShadow receiveShadow>
+        <cylinderGeometry args={[0.22, 0.17, 0.62, 20]} />
+        <meshStandardMaterial color="#27303b" roughness={0.55} metalness={0.28} />
+      </mesh>
+      <mesh position={[0, 0.64, 0]} castShadow>
+        <torusGeometry args={[0.205, 0.025, 10, 24]} />
+        <meshStandardMaterial color="#7b8795" roughness={0.35} metalness={0.65} />
+      </mesh>
+      <mesh position={[0, 0.655, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <circleGeometry args={[0.17, 20]} />
+        <meshStandardMaterial color="#10151c" roughness={0.9} />
+      </mesh>
+    </group>
+  )
+}
+
+function Chair({ position = [0, 0, 0] }) {
+  return (
+    <group position={position} rotation={[0, Math.PI, 0]}>
+      <mesh position={[0, 1.25, 0]} castShadow>
+        <boxGeometry args={[0.9, 0.9, 0.12]} />
+        <meshStandardMaterial color="#263445" roughness={0.68} metalness={0.12} />
+      </mesh>
+      <mesh position={[0, 0.82, 0.08]} castShadow>
+        <boxGeometry args={[0.92, 0.12, 0.82]} />
+        <meshStandardMaterial color="#34475c" roughness={0.72} />
+      </mesh>
+      <mesh position={[0, 0.38, 0]} castShadow>
+        <cylinderGeometry args={[0.055, 0.075, 0.7, 12]} />
+        <meshStandardMaterial color="#748193" roughness={0.3} metalness={0.75} />
+      </mesh>
+      <mesh position={[0, 0.04, 0]} castShadow>
+        <cylinderGeometry args={[0.32, 0.32, 0.05, 16]} />
+        <meshStandardMaterial color="#1e2732" roughness={0.5} metalness={0.5} />
+      </mesh>
+      {[0, 1, 2, 3, 4].map((i) => {
+        const angle = (i / 5) * Math.PI * 2
+        return (
+          <mesh
+            key={i}
+            position={[Math.cos(angle) * 0.28, 0.07, Math.sin(angle) * 0.28]}
+            rotation={[0, 0, Math.cos(angle) * 0.75]}
+            castShadow
+          >
+            <boxGeometry args={[0.38, 0.035, 0.045]} />
+            <meshStandardMaterial color="#293441" roughness={0.5} metalness={0.5} />
+          </mesh>
+        )
+      })}
+    </group>
+  )
+}
+
 function SmallRover({ position = [0, 0, 0] }) {
   const roverRef = useRef()
   const startPos = useRef(position)
@@ -411,16 +467,18 @@ function Particles() {
 export default function Props() {
   return (
     <group>
-      <RaspberryPi position={[0.3, 0.8, -1.1]} />
-      <ESP32 position={[-0.8, 0.8, -1.0]} />
-      <Oscilloscope position={[1.8, 0.8, -1.2]} />
-      <SolderingIron position={[-2.0, 0.88, -0.3]} />
-      <DeskFan position={[-2.2, 0.8, -1.0]} />
-      <DigitalClock position={[0.8, 0.8, -1.3]} />
-      <StickyNotes position={[1.0, 0.8, 0.5]} />
-      <USBDrives position={[-0.3, 0.8, 0.4]} />
-      <Books position={[2.0, 0.8, 1.0]} />
-      <SmallRover position={[-1.0, 0.8, 1.0]} />
+      <RaspberryPi position={[0.85, 0.84, -1.1]} />
+      <ESP32 position={[-0.85, 0.84, -1.0]} />
+      <Oscilloscope position={[1.9, 0.93, -1.2]} />
+      <SolderingIron position={[-2.0, 0.9, -0.3]} />
+      <DeskFan position={[-2.25, 0.84, -1.0]} />
+      <DigitalClock position={[0.8, 0.91, -1.3]} />
+      <StickyNotes position={[1.0, 0.84, 0.5]} />
+      <USBDrives position={[-0.3, 0.84, 0.4]} />
+      <Books position={[2.0, 0.84, 1.0]} />
+      <SmallRover position={[-1.0, 0.84, 1.0]} />
+      <WasteBin position={[3.15, 0.02, 0.9]} />
+      <Chair position={[-0.1, 0.02, 3.05]} />
       <Particles />
     </group>
   )

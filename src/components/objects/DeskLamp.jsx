@@ -45,6 +45,7 @@ export default function DeskLamp({
       onPointerOver={onPointerOver}
       onPointerOut={onPointerOut}
       onClick={onClick}
+      scale={1.42}
       {...props}
     >
       {/* === BASE === */}

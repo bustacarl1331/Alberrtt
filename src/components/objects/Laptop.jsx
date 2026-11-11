@@ -1,5 +1,7 @@
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
+import { aboutData, educationData } from '../../data/content';
 
 export default function Laptop({
   position,
@@ -113,6 +115,29 @@ export default function Laptop({
             toneMapped={false}
           />
         </mesh>
+
+        {isActive && (
+          <Html
+            transform
+            position={[0, 0.31, 0.035]}
+            rotation={[0, 0, 0]}
+            distanceFactor={5.8}
+            style={{ pointerEvents: 'none' }}
+          >
+            <div className="laptop-screen-ui">
+              <div className="laptop-screen-kicker">PROFILE / 01</div>
+              <div className="laptop-screen-title">{aboutData.name}</div>
+              <div className="laptop-screen-role">{aboutData.title}</div>
+              <div className="laptop-screen-rule" />
+              <div className="laptop-screen-copy">
+                {aboutData.bio?.[0] || 'Building thoughtful hardware and software experiences.'}
+              </div>
+              <div className="laptop-screen-meta">
+                {educationData.branch} · {educationData.duration}
+              </div>
+            </div>
+          </Html>
+        )}
 
         {/* Webcam dot */}
         <mesh position={[0, 0.57, 0.022]}>
